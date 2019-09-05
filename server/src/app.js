@@ -6,12 +6,17 @@ const morgan = require('morgan');
 const app = express();
 
 app.use(morgan('combined'));
-app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json({
+    type: 'application/json'
+}))
 app.use(cors());
 
-app.get('/status', (req, res) => {
+app.post('/register', (req, res) => {
     res.send({
-        message: 'Hello world!'
+        message: `Hello ${req.body.email}! You have been registered succesfully`
     })
 });
 
