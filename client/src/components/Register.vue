@@ -33,10 +33,10 @@ export default {
   methods: {
     async register () {
       const response = await authenticationService.register({
-        email: this.emal,
+        email: this.email,
         password: this.password
       })
-      console.log(response.data)
+      console.log(response)
     }
   }
 }
