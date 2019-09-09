@@ -15,9 +15,12 @@
       v-model="password"
       placeholder="Password"
     />
-    <button
-      @click="register"
-    >Register</button>
+    <div class="error" v-html="error" />
+    <v-btn
+      class="orange"
+      @click="register">
+      Register
+    </v-btn>
   </div>
 </template>
 
@@ -27,16 +30,20 @@ export default {
   data () {
     return {
       email: null,
-      password: null
+      password: null,
+      error: null
     }
   },
   methods: {
     async register () {
-      const response = await authenticationService.register({
-        email: this.email,
-        password: this.password
-      })
-      console.log(response)
+      try {
+        await authenticationService.register({
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
@@ -69,5 +76,9 @@ export default {
   button:hover {
     background-color: aquamarine;
     color: blue;
+  }
+
+  .error {
+    color: red;
   }
 </style>
