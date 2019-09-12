@@ -1,10 +1,9 @@
 <template>
-  <div class="register">
-    <h1>Register</h1>
+  <div class="login">
+    <h1>Login</h1>
 
     <form
-      name="tab-tracker-form"
-      autocomplete="off">
+      name="tab-tracker-login">
       <input
         type="email"
         name="email"
@@ -21,8 +20,8 @@
       <div class="error" v-html="error" />
       <v-btn
         class="orange"
-        @click="register">
-        Register
+        @click="login">
+        Login
       </v-btn>
     </form>
   </div>
@@ -39,9 +38,9 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        const response = await authenticationService.register({
+        const response = await authenticationService.login({
           email: this.email,
           password: this.password
         })
@@ -57,9 +56,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .register {
-    display: flex;
-    flex-direction: column;
+  .login {
     max-width: 440px;
     margin: 0 auto;
   }
